@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mga Sayaw — Sayaw</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="logo">PATHFIT 03 <span class="logo-tag">Final Project</span></a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <ul id="navLinks">
+    <li><a href="/index.html">Tahanan</a></li>
+    <li><a href="/Dances.html" class="active">Mga Sayaw</a></li>
+    <li><a href="/credits.html">Mga Gumawa</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="breadcrumb"><a href="index.html">Tahanan</a><span class="sep">/</span><span>Mga Sayaw</span></div>
+  <p class="page-hero-label">Ang Tatlong Piling Sayaw</p>
+  <h1>Katalogo ng mga <em>Sayaw</em></h1>
+  <p>I-filter ayon sa kategorya at i-click ang alinmang sayaw upang buksan ang kumpletong tutorial na may hakbang-hakbang na gabay.</p>
+</div>
+
+<section style="background:var(--surface);" class="weave-bg">
+  <div class="dance-tabs">
+    <button class="tab-btn active" data-filter="all">Lahat</button>
+    <button class="tab-btn" data-filter="courtship">Panliligaw</button>
+    <button class="tab-btn" data-filter="festival">Pagdiriwang</button>
+    <button class="tab-btn" data-filter="visayas">Visayas</button>
+    <button class="tab-btn" data-filter="luzon">Luzon</button>
+  </div>
+  <div class="dance-cards">
+    <a class="dance-card" href="/Dances/Carinosa.html" data-category="courtship pangkasal visayas">
+      <div class="dance-number">01 / 03</div>
+      <div class="province-badge">Bisaya / Visayas</div>
+      <div class="dance-name">Cariñosa</div>
+      <div class="dance-name-ph">Sayaw ng Pag-ibig · Courtship Dance</div>
+      <div class="dance-desc">Born in the Spanish colonial era, the Cariñosa (meaning affectionate or lovable) is considered the national folk dance of the Philippines. It is a courtship dance filled with flirtatious hide-and-seek gestures using a fan and handkerchief, symbolizing the shyness and charm of Filipino romance.</div>
+      <div class="dance-tags"><span class="tag gold">Courtship</span><span class="tag red">Visayas</span><span class="tag gold">Beginner</span></div>
+      <div class="dance-link">Buksan ang Tutorial</div>
+    </a>
+    <a class="dance-card" href="/Dances/Pandanggo.html" data-category="festival luzon">
+      <div class="dance-number">02 / 03</div>
+      <div class="province-badge">Lubang Island, Mindoro</div>
+      <div class="dance-name">Pandanggo sa Ilaw</div>
+      <div class="dance-name-ph">Sayaw ng Ilaw · Dance of Lights</div>
+      <div class="dance-desc">Originating from Lubang Island in Mindoro, Pandanggo sa Ilaw (Fandango of Lights) is one of the most visually stunning Filipino folk dances. Derived from the Spanish fandango, it showcases the dancer's exceptional balance and grace as they move with three oil lamps — one on the head and one balanced on the back of each hand.</div>
+      <div class="dance-tags"><span class="tag gold">Balance</span><span class="tag red">Mindoro</span><span class="tag gold">Intermediate</span></div>
+      <div class="dance-link">Buksan ang Tutorial</div>
+    </a>
+    <a class="dance-card" href="/Dances/Kuratsa.html" data-category="festival courtship visayas">
+      <div class="dance-number">03 / 03</div>
+      <div class="province-badge">Bohol / Eastern Visayas</div>
+      <div class="dance-name">Kuratsa</div>
+      <div class="dance-name-ph">Sayaw ng Pagdiriwang · Celebration Dance</div>
+      <div class="dance-desc">The Kuratsa is a lively courtship and celebration dance from Bohol in the Eastern Visayas. It is traditionally performed at weddings and fiestas, often as a highlight of the reception. The dance tells a universal story: a young man chases a woman who playfully resists, until they finally dance together in joyful celebration.</div>
+      <div class="dance-tags"><span class="tag gold">Festival</span><span class="tag red">Bohol</span><span class="tag gold">Intermediate</span></div>
+      <div class="dance-link">Buksan ang Tutorial</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">PATFIT 03</div>
+  <div class="footer-copy">© 2025 · Proyektong Pang-Aral</div>
+  <div class="footer-links">
+    <a href="/index.html">Tahanan</a>
+    <a href="/Dances.html">Mga Sayaw</a>
+    <a href="/credits.html">Mga Gumawa</a>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+<script src="/JS/Script.js"></script>
+
+
+<script>
+  function initDanceTabs() {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.dance-card');
+
+    if (!tabs.length) return;
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', function () {
+
+        tabs.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.dataset.filter;
+
+        cards.forEach(card => {
+          const cardCategory = card.dataset.category || '';
+
+          if (filter === 'all') {
+            card.style.display = '';        
+          } else if (cardCategory.includes(filter)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDanceTabs);
+  } else {
+    initDanceTabs();
+  }
+</script>
+</body>
+</html>
